@@ -6,13 +6,13 @@ public class DemoService {
 
 
     @Value("其他类的属性")
-    private String anther;
+    private String another;
 
     public String getAnther() {
-        return anther;
+        return another;
     }
 
     public void setAnther(String anther) {
-        this.anther = anther;
+        this.another = anther;
     }
 }

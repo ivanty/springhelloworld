@@ -63,15 +63,18 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.5</version>
     </dependency>
+    <!--资源调用接口-->
     <dependency>
-
-
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.3</version>
     </dependency>
-
-
+       <!--JSR250支持-->
+    <dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>jsr250-api</artifactId>
+    <version>1.0</version>
+  </dependency>
 
   </dependencies>
 
