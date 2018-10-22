@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 @Service
-public class AwareService implements BeanNameAware,ResourceLoaderAware {
+public class TestService implements BeanNameAware,ResourceLoaderAware {
 
 
     private String beanName;
@@ -24,8 +24,6 @@ public class AwareService implements BeanNameAware,ResourceLoaderAware {
 
            this.loader=resourceLoader;
     }
-
-
     @Override
     public void setBeanName(String name) {
         this.beanName=name;

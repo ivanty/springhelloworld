@@ -1,8 +1,14 @@
 package com.xue.controller;
 
+import com.xue.annotation.DemoConfig;
+import com.xue.annotation.DemoService;
 import com.xue.aop.AopConfig;
 import com.xue.aop.DemoAnnotationService;
 import com.xue.aop.DemoMethodService;
+import com.xue.aware.AwareConfig;
+import com.xue.aware.TestService;
+import com.xue.conditional.ConditionConfig;
+import com.xue.conditional.ListService;
 import com.xue.el.ElConfig;
 import com.xue.event.DemoPublisher;
 import com.xue.event.EventConfig;
@@ -16,6 +22,9 @@ import com.xue.scope.DemoSingletonService;
 import com.xue.scope.ScopeConfig;
 import com.xue.service.DiConfig;
 import com.xue.service.UseFunctionService;
+import com.xue.taskexecutor.AsyncTaskService;
+import com.xue.taskexecutor.TaskExecutorConfig;
+import com.xue.taskscheduler.TaskSchedulerConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 public class Main {
     public static void main(String[] args) {
@@ -50,6 +59,7 @@ public class Main {
         BeanWayService beanWayService=context.getBean(BeanWayService.class);
         JSR250WayService jsr250WayService=context.getBean(JSR250WayService.class);
         context.close();*/
+
       //测试profile
        /* AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev");
@@ -61,18 +71,39 @@ public class Main {
 
          //测试事件发布
 
-        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(EventConfig.class);
+       /* AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(EventConfig.class);
         DemoPublisher demoPublisher=context.getBean(DemoPublisher.class);
         demoPublisher.publish("hello application event");
+        context.close();
+*/
+       //测试Spring aware
+       /* AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(AwareConfig.class);
+                TestService awareService=context.getBean(TestService.class);
+                awareService.outputResult();
+                context.close();*/
+      /* //测试多线程
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(TaskExecutorConfig.class);
+        AsyncTaskService asyncTaskService=context.getBean(AsyncTaskService.class);
+        for (int i=0;i<10;i++){
+            asyncTaskService.executeAsynTask(i);
+            asyncTaskService.executeAsynTaskPlus(i);
+        }
+        context.close();*/
+      //测试计划任务
+/*
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(TaskSchedulerConfig.class);*/
+
+       //测试@Contional的条件
+        /*AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(ConditionConfig.class);
+        ListService listService=context.getBean(ListService.class);
+        System.out.println(context.getEnvironment().getProperty("os.name")+"系统下的列表命令为:"+listService.showListCmd());*/
+        //组合注解
+        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(DemoConfig.class);
+        DemoService demoService=context.getBean(DemoService.class);
+        demoService.outputResult();
         context.close();
 
 
 
-
-
-
-
-
-
-}
+ }
 }
